@@ -1,0 +1,72 @@
+# Netlify Configuration for Web Game
+
+# Build settings
+[build]
+command = "npm run build"
+publish = "dist"
+# functions = "netlify/functions"
+
+# Environment variables (optional)
+[build.environment]
+# NODE_VERSION = "18"
+# NODE_ENV = "production"
+
+# Development settings
+[dev]
+command = "npm run dev"
+port = 3000
+publish = "dist"
+# targetPort = 8080
+autoLaunch = true
+
+# Redirects - Single Page Application (SPA) configuration
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
+
+# Headers for optimal game performance
+[[headers]]
+for = "/*"
+[headers.values]
+# Cache static assets
+Cache-Control = "public, max-age=3600"
+# Security headers
+X-Frame-Options = "SAMEORIGIN"
+X-Content-Type-Options = "nosniff"
+X-XSS-Protection = "1; mode=block"
+Referrer-Policy = "no-referrer-when-downgrade"
+
+# Cache for game assets (images, audio, etc.)
+[[headers]]
+for = "/assets/*"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache for scripts
+[[headers]]
+for = "/*.js"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache for styles
+[[headers]]
+for = "/*.css"
+[headers.values]
+Cache-Control = "public, max-age=31536000, immutable"
+
+# No cache for HTML (always check for updates)
+[[headers]]
+for = "/*.html"
+[headers.values]
+Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Context-specific settings (optional)
+# [context.production]
+# command = "npm run build:prod"
+# 
+# [context.deploy-preview]
+# command = "npm run build"
+# 
+# [context.branch-deploy]
+# command = "npm run build"
