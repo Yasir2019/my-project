@@ -1,0 +1,280 @@
+/* ===================================
+   RESPONSIVE DESIGN
+   =================================== */
+
+/* Tablet (768px and up) */
+@media (min-width: 768px) {
+    .hud {
+        font-size: 16px;
+    }
+    
+    .hud-value {
+        font-size: 28px;
+    }
+    
+    .menu-title {
+        font-size: 40px;
+    }
+    
+    .game-title {
+        font-size: 56px;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+    
+    .stat-value {
+        font-size: 28px;
+    }
+}
+
+/* Desktop (1024px and up) */
+@media (min-width: 1024px) {
+    .hud {
+        font-size: 18px;
+        padding: 30px;
+    }
+    
+    .hud-left,
+    .hud-right {
+        gap: 50px;
+    }
+    
+    .hud-value {
+        font-size: 32px;
+    }
+    
+    .menu-content {
+        background: rgba(0, 212, 255, 0.05);
+        padding: 50px;
+        border: 2px solid var(--primary-color);
+        border-radius: 12px;
+        box-shadow: 0 0 50px rgba(0, 212, 255, 0.3);
+    }
+    
+    .menu-title {
+        font-size: 48px;
+    }
+    
+    .game-title {
+        font-size: 64px;
+    }
+    
+    .btn {
+        padding: 14px 40px;
+        font-size: 18px;
+    }
+    
+    .stats-container {
+        padding: 30px;
+    }
+}
+
+/* Mobile (480px and below) */
+@media (max-width: 480px) {
+    #game-container {
+        padding: 0;
+    }
+    
+    .hud {
+        flex-direction: column;
+        gap: 15px;
+        padding: 15px;
+        font-size: 12px;
+    }
+    
+    .hud-left,
+    .hud-right,
+    .hud-center {
+        width: 100%;
+        flex-direction: row;
+        justify-content: space-around;
+        gap: 10px;
+    }
+    
+    .hud-item {
+        gap: 4px;
+    }
+    
+    .hud-label {
+        font-size: 10px;
+    }
+    
+    .hud-value {
+        font-size: 18px;
+    }
+    
+    .health-bar {
+        width: 100px;
+        height: 10px;
+    }
+    
+    .btn-pause {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        top: 10px;
+        right: 10px;
+    }
+    
+    .menu-content {
+        padding: 20px;
+        margin: 20px;
+    }
+    
+    .menu-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+    
+    .game-title {
+        font-size: 36px;
+        margin-bottom: 5px;
+    }
+    
+    .game-subtitle {
+        font-size: 14px;
+        margin-bottom: 20px;
+    }
+    
+    .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+        max-width: 250px;
+    }
+    
+    .stats-container {
+        grid-template-columns: 1fr;
+        gap: 10px;
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .stat-value {
+        font-size: 20px;
+    }
+    
+    .setting-item {
+        flex-direction: column;
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .leaderboard-tabs {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .tab-btn {
+        width: 100%;
+        padding: 10px;
+    }
+    
+    .leaderboard-entry {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+    
+    .leaderboard-rank {
+        width: 30px;
+        font-size: 12px;
+    }
+    
+    .leaderboard-name {
+        padding: 0 8px;
+        font-size: 12px;
+    }
+    
+    .leaderboard-score {
+        font-size: 14px;
+    }
+    
+    .wave-indicator {
+        padding: 10px 15px;
+        border-width: 1px;
+        gap: 4px;
+    }
+    
+    .wave-indicator .hud-label {
+        font-size: 10px;
+    }
+    
+    .wave-indicator .hud-value {
+        font-size: 24px;
+    }
+}
+
+/* Very Small Mobile (320px) */
+@media (max-width: 320px) {
+    .hud {
+        padding: 10px;
+        gap: 10px;
+    }
+    
+    .hud-label {
+        font-size: 8px;
+    }
+    
+    .hud-value {
+        font-size: 14px;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 12px;
+        max-width: 200px;
+    }
+    
+    .menu-title {
+        font-size: 20px;
+    }
+    
+    .game-title {
+        font-size: 28px;
+    }
+}
+
+/* Landscape Mode */
+@media (max-height: 600px) and (orientation: landscape) {
+    .hud {
+        padding: 10px 20px;
+    }
+    
+    .menu-content {
+        max-height: 100vh;
+        overflow-y: auto;
+    }
+    
+    .stats-container {
+        gap: 10px;
+        padding: 10px;
+    }
+}
+
+/* Touch Device Optimization */
+@media (hover: none) and (pointer: coarse) {
+    .btn {
+        padding: 14px 30px;
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .btn-pause {
+        min-height: 50px;
+        min-width: 50px;
+    }
+    
+    .tab-btn {
+        padding: 10px 14px;
+        min-height: 44px;
+    }
+}
+
+/* Retina Display (High DPI) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    #gameCanvas {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+    }
+}

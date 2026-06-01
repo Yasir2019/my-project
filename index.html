@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Space Shooter - A world-class vertical scroll shooter game with premium graphics and gameplay.">
+    <meta name="keywords" content="space shooter, arcade game, html5 game, browser game">
+    <meta name="theme-color" content="#1a0033">
+    
+    <!-- Open Graph for social sharing -->
+    <meta property="og:title" content="Space Shooter - Epic Browser Game">
+    <meta property="og:description" content="Destroy enemies, climb the leaderboard, and become the ultimate space pilot!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://space-stealth-shooter.netlify.app">
+    
+    <title>Space Shooter - Arcade Action Game</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/ui.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="manifest" href="manifest.json">
+</head>
+<body>
+    <!-- Game Container -->
+    <div id="game-container">
+        <!-- Canvas for game rendering -->
+        <canvas id="gameCanvas"></canvas>
+        
+        <!-- UI Overlay -->
+        <div id="ui-overlay">
+            <!-- Main Menu -->
+            <div id="main-menu" class="menu active">
+                <div class="menu-content">
+                    <div class="game-title">SPACE SHOOTER</div>
+                    <div class="game-subtitle">Ultimate Arcade Experience</div>
+                    
+                    <button id="start-btn" class="btn btn-primary">START GAME</button>
+                    <button id="leaderboard-btn" class="btn btn-secondary">LEADERBOARD</button>
+                    <button id="settings-btn" class="btn btn-secondary">SETTINGS</button>
+                    <button id="about-btn" class="btn btn-secondary">ABOUT</button>
+                </div>
+            </div>
+            
+            <!-- Game HUD -->
+            <div id="game-hud" class="hud">
+                <div class="hud-left">
+                    <div class="hud-item">
+                        <span class="hud-label">SCORE</span>
+                        <span id="score-display" class="hud-value">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">COMBO</span>
+                        <span id="combo-display" class="hud-value">0x</span>
+                    </div>
+                </div>
+                
+                <div class="hud-center">
+                    <div class="wave-indicator">
+                        <span class="hud-label">WAVE</span>
+                        <span id="wave-display" class="hud-value">1</span>
+                    </div>
+                </div>
+                
+                <div class="hud-right">
+                    <div class="hud-item">
+                        <span class="hud-label">HEALTH</span>
+                        <div id="health-bar" class="health-bar">
+                            <div id="health-fill" class="health-fill"></div>
+                        </div>
+                    </div>
+                    <button id="pause-btn" class="btn-pause">⏸</button>
+                </div>
+            </div>
+            
+            <!-- Pause Menu -->
+            <div id="pause-menu" class="menu">
+                <div class="menu-content">
+                    <div class="menu-title">PAUSED</div>
+                    <button id="resume-btn" class="btn btn-primary">RESUME</button>
+                    <button id="settings-pause-btn" class="btn btn-secondary">SETTINGS</button>
+                    <button id="menu-btn" class="btn btn-secondary">MAIN MENU</button>
+                </div>
+            </div>
+            
+            <!-- Game Over Screen -->
+            <div id="game-over-screen" class="menu">
+                <div class="menu-content">
+                    <div class="menu-title">GAME OVER</div>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <span class="stat-label">FINAL SCORE</span>
+                            <span id="final-score" class="stat-value">0</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">WAVE REACHED</span>
+                            <span id="final-wave" class="stat-value">1</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">ENEMIES DESTROYED</span>
+                            <span id="enemies-destroyed" class="stat-value">0</span>
+                        </div>
+                    </div>
+                    <button id="restart-btn" class="btn btn-primary">PLAY AGAIN</button>
+                    <button id="menu-from-gameover-btn" class="btn btn-secondary">MAIN MENU</button>
+                </div>
+            </div>
+            
+            <!-- Settings Menu -->
+            <div id="settings-menu" class="menu">
+                <div class="menu-content">
+                    <div class="menu-title">SETTINGS</div>
+                    
+                    <div class="setting-item">
+                        <label>MUSIC</label>
+                        <div class="toggle">
+                            <input type="checkbox" id="music-toggle" checked>
+                            <span class="toggle-label"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label>SOUND EFFECTS</label>
+                        <div class="toggle">
+                            <input type="checkbox" id="sfx-toggle" checked>
+                            <span class="toggle-label"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-item">
+                        <label>DIFFICULTY</label>
+                        <select id="difficulty-select">
+                            <option value="easy">EASY</option>
+                            <option value="normal" selected>NORMAL</option>
+                            <option value="hard">HARD</option>
+                            <option value="insane">INSANE</option>
+                        </select>
+                    </div>
+                    
+                    <button id="back-settings-btn" class="btn btn-primary">BACK</button>
+                </div>
+            </div>
+            
+            <!-- Leaderboard Menu -->
+            <div id="leaderboard-menu" class="menu">
+                <div class="menu-content">
+                    <div class="menu-title">LEADERBOARD</div>
+                    <div class="leaderboard-tabs">
+                        <button class="tab-btn active" data-tab="all-time">ALL TIME</button>
+                        <button class="tab-btn" data-tab="daily">TODAY</button>
+                        <button class="tab-btn" data-tab="weekly">THIS WEEK</button>
+                    </div>
+                    <div id="leaderboard-list" class="leaderboard-list">
+                        <div class="leaderboard-loading">Loading...</div>
+                    </div>
+                    <button id="back-leaderboard-btn" class="btn btn-primary">BACK</button>
+                </div>
+            </div>
+            
+            <!-- About Menu -->
+            <div id="about-menu" class="menu">
+                <div class="menu-content">
+                    <div class="menu-title">ABOUT</div>
+                    <div class="about-content">
+                        <p>Space Shooter is a modern take on classic arcade shooters with premium graphics and addictive gameplay.</p>
+                        <p><strong>Version:</strong> 1.0.0</p>
+                        <p><strong>Developer:</strong> Yasir2019</p>
+                        <p><strong>Built with:</strong> HTML5 Canvas, Vanilla JavaScript</p>
+                    </div>
+                    <button id="back-about-btn" class="btn btn-primary">BACK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Audio Elements (will be created dynamically) -->
+    <audio id="audio-shoot" preload="auto"></audio>
+    <audio id="audio-hit" preload="auto"></audio>
+    <audio id="audio-explosion" preload="auto"></audio>
+    <audio id="audio-music" preload="auto" loop></audio>
+    
+    <!-- Scripts -->
+    <script src="js/core/Config.js"></script>
+    <script src="js/utils/Storage.js"></script>
+    <script src="js/core/Canvas.js"></script>
+    <script src="js/core/Input.js"></script>
+    <script src="js/core/Collision.js"></script>
+    <script src="js/systems/ParticleSystem.js"></script>
+    <script src="js/systems/AudioManager.js"></script>
+    <script src="js/systems/AnimationManager.js"></script>
+    <script src="js/systems/EffectsManager.js"></script>
+    <script src="js/entities/Entity.js"></script>
+    <script src="js/entities/Player.js"></script>
+    <script src="js/entities/Enemy.js"></script>
+    <script src="js/entities/Boss.js"></script>
+    <script src="js/entities/Bullet.js"></script>
+    <script src="js/entities/Powerup.js"></script>
+    <script src="js/gameplay/WaveSystem.js"></script>
+    <script src="js/gameplay/ScoringSystem.js"></script>
+    <script src="js/gameplay/AchievementSystem.js"></script>
+    <script src="js/ui/UIManager.js"></script>
+    <script src="js/core/Game.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
